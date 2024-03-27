@@ -1,15 +1,52 @@
+const childSchema = require("../models/childModel");
+
 exports.getAllChildren = (req, res, next) => {
-  res.status(200).json({ data: [] });
+  childSchema
+    .find({})
+    .then((data) => {
+      res.status(200).json({ data });
+    })
+    .catch((err) => next(err));
 };
 exports.getChildByID = (req, res, next) => {
-  res.status(200).json({ data: req.params.id });
+  childSchema
+    .findById(req.params.id)
+    .then((object) => {
+      if (!object) {
+        throw new Error("Teacher not Exist");
+      }
+      res.status(200).json({ object });
+    })
+    .catch((err) => next(err));
 };
 exports.deleteChildByID = (req, res, next) => {
-  res.status(200).json({ data: req.params.id });
+  childSchema
+    .findByIdAndDelete(req.params.id)
+    .then((object) => {
+      if (!object) {
+        throw new Error("Child not Exist Can't delete");
+      }
+      res.status(200).json(object);
+    })
+    .catch((err) => next(err));
 };
 exports.insertChild = (req, res, next) => {
-  res.status(200).json({ data: req.body });
+  let object = new childSchema(req.body);
+  object
+    .save()
+    .then(() => {
+      res.status(200).json({ action: "record added successfully" });
+    })
+    .catch((err) => next(err));
 };
 exports.updateChild = (req, res, next) => {
-  res.status(200).json({ data: req.body });
+  childSchema
+    .findByIdAndUpdate(req.body._id, req.body)
+    .then((object) => {
+      if (!object) {
+        throw new Error("Child not Exist Can't update");
+      }
+      res.status(200).json({ object });
+    })
+    .catch((err) => next(err));
 };

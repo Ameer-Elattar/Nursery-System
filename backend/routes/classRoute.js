@@ -1,5 +1,7 @@
 const exprees = require("express");
 const controller = require("../controllers/classController");
+const validator = require("../middleware/classValidator");
+const validatorResult = require("../middleware/validatorResult");
 const router = exprees.Router();
 
 router.get("/class/child/:id", controller.getClassChildrenInfo);
@@ -8,10 +10,10 @@ router.get("/class/teacher/:id", controller.getClassSupervisorInfo);
 router
   .route("/class")
   .get(controller.getAllclasses)
-  .post(controller.insertClass)
-  .patch(controller.updateClass);
+  .post(validator.insert, validatorResult, controller.insertClass)
+  .patch(validator.update, validatorResult, controller.updateClass);
 router
-  .router("/class/:id")
+  .route("/class/:id")
   .get(controller.getClassByID)
   .delete(controller.deleteClassByID);
 

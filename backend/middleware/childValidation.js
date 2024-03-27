@@ -1,7 +1,6 @@
 const { body } = require("express-validator");
 
 exports.insert = [
-  body("_id").isInt().withMessage("child ID is a number"),
   body("fullName")
     .isAlpha("en-US", { ignore: " " })
     .withMessage("child full name should be String")

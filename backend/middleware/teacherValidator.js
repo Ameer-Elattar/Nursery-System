@@ -1,4 +1,4 @@
-const { body, param } = require("express-validator");
+const { body } = require("express-validator");
 
 exports.insert = [
   body("_id").isMongoId().withMessage("teacher id should be object ID"),
@@ -35,5 +35,11 @@ exports.update = [
     .isString()
     .withMessage("image should be entered as string"),
 ];
-
-//teacher Data: _id(objectID), fullname,password, email , image (which is string)
+exports.changePassword = [
+  body("_id").isMongoId().withMessage("teacher id should be object ID"),
+  body("password")
+    .isString()
+    .withMessage("password should be String")
+    .isLength({ min: 4 })
+    .withMessage("password length should be more that 4 "),
+];

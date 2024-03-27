@@ -6,6 +6,13 @@ const router = express.Router();
 
 router.get("/teachers/supervisors", controller.getSupervisors);
 router
+  .route("/teachers/changePassword")
+  .patch(
+    validator.changePassword,
+    validationResult,
+    controller.changeTeacherPassword
+  );
+router
   .route("/teachers/:id")
   .get(controller.getTeacherByID)
   .delete(controller.deleteTeacherByID);
@@ -13,6 +20,6 @@ router
   .route("/teachers")
   .get(controller.getAllTeachers)
   .post(validator.insert, validationResult, controller.insertTeacher)
-  .patch(validator.insert, validationResult, controller.updateTeacher);
+  .patch(validator.update, validationResult, controller.updateTeacher);
 
 module.exports = router;
