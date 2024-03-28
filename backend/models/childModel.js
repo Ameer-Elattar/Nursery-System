@@ -14,6 +14,7 @@ const schema = mongoose.Schema({
   age: Number,
   level: String,
   address: embeddedAddress,
+  image: String,
 });
 
 schema.plugin(autoIncrement, { id: "child_id" });

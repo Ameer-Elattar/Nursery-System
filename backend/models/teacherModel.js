@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const bcryptjs = require("bcryptjs");
 const schema = mongoose.Schema({
-  _id: mongoose.Types.ObjectId,
   fullName: { type: String },
   password: { type: String },
   email: { type: String, unique: true },
+  image: String,
 });
 
 schema.pre("save", function (next) {

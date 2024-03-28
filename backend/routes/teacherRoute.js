@@ -19,7 +19,17 @@ router
 router
   .route("/teachers")
   .get(controller.getAllTeachers)
-  .post(validator.insert, validationResult, controller.insertTeacher)
-  .patch(validator.update, validationResult, controller.updateTeacher);
+  .post(
+    controller.upload.single("file"),
+    validator.insert,
+    validationResult,
+    controller.insertTeacher
+  )
+  .patch(
+    controller.upload.single("file"),
+    validator.update,
+    validationResult,
+    controller.updateTeacher
+  );
 
 module.exports = router;
