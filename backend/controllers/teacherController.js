@@ -1,4 +1,5 @@
 const teacherSchema = require("../models/teacherModel");
+const classSchema = require("../models/classModel");
 const bcryptjs = require("bcryptjs");
 exports.getAllTeachers = (req, res, next) => {
   teacherSchema
@@ -64,5 +65,11 @@ exports.changeTeacherPassword = (req, res, next) => {
   });
 };
 exports.getSupervisors = (req, res, next) => {
-  res.status(200).json({ data: [] });
+  classSchema
+    .find({}, { superID: 1 })
+    .populate({ path: "superID" })
+    .then((data) => {
+      res.status(200).json({ data });
+    })
+    .catch((err) => next(err));
 };
