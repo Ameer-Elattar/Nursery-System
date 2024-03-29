@@ -10,3 +10,12 @@ module.exports = (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.isAdmin = (req, res, next) => {
+  if (req.token.role === "admin") next();
+  else throw new Error("Unautherized for this action");
+};
+exports.isAdminOrTeacher = (req, res, next) => {
+  if (req.token.role === "admin" || req.token.role === "teacher") next();
+  else throw new Error("Unautherized for this action");
+};

@@ -9,6 +9,7 @@ const classRouter = require("./routes/classRoute");
 const adminRouter = require("./routes/adminRoute");
 const loginRoute = require("./routes/loginRoute");
 const loginMW = require("./middleware/loginMiddleware");
+const registerRoute = require("./routes/registerRoute");
 
 // setting up server
 const server = express();
@@ -30,6 +31,7 @@ server.use(morgan("dev"));
 //Endpoints Middleware
 server.use(express.json());
 server.use(loginRoute);
+server.use(registerRoute);
 server.use(loginMW);
 server.use(teacherRouter);
 server.use(childRouter);
