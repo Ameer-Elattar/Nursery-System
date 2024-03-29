@@ -6,6 +6,9 @@ const mongoose = require("mongoose");
 const teacherRouter = require("./routes/teacherRoute");
 const childRouter = require("./routes/childRoute");
 const classRouter = require("./routes/classRoute");
+const adminRouter = require("./routes/adminRoute");
+const loginRoute = require("./routes/loginRoute");
+const loginMW = require("./middleware/loginMiddleware");
 
 // setting up server
 const server = express();
@@ -26,9 +29,12 @@ server.use(morgan("dev"));
 
 //Endpoints Middleware
 server.use(express.json());
+server.use(loginRoute);
+server.use(loginMW);
 server.use(teacherRouter);
 server.use(childRouter);
 server.use(classRouter);
+server.use(adminRouter);
 
 // Not Found MiddleWare
 
