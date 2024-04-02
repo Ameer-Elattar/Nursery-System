@@ -4,8 +4,9 @@ const FS = require("fs");
 const storage = multer.memoryStorage();
 const teacherSchema = require("../models/teacherModel");
 const classSchema = require("../models/classModel");
-
 exports.upload = multer({ storage: storage });
+
+
 exports.getAllTeachers = (req, res, next) => {
   teacherSchema
     .find({})

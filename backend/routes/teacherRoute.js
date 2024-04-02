@@ -5,6 +5,7 @@ const validationResult = require("../middleware/validatorResult");
 const { isAdmin, isAdminOrTeacher } = require("../middleware/loginMiddleware");
 const router = express.Router();
 
+
 router.get("/teachers/supervisors", isAdmin, controller.getSupervisors);
 router
   .route("/teachers/changePassword")
@@ -37,3 +38,7 @@ router
   );
 
 module.exports = router;
+
+
+
+
