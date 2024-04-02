@@ -6,7 +6,6 @@ const teacherSchema = require("../models/teacherModel");
 const classSchema = require("../models/classModel");
 exports.upload = multer({ storage: storage });
 
-
 exports.getAllTeachers = (req, res, next) => {
   teacherSchema
     .find({})

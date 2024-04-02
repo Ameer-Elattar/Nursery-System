@@ -2,7 +2,6 @@ const express = require("express");
 const morgan = require("morgan");
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
-const swaggerJsdoc = require('swagger-jsdoc');
 const SwaggerUI = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
@@ -13,7 +12,6 @@ const adminRouter = require("./routes/adminRoute");
 const loginRoute = require("./routes/loginRoute");
 const loginMW = require("./middleware/loginMiddleware");
 const registerRoute = require("./routes/registerRoute");
-
 
 // setting up server
 const server = express();
@@ -29,15 +27,8 @@ mongoose
   })
   .catch((error) => console.log(`DB issue ..... ${error}`));
 
-
-
 // Serve the Swagger UI at /api-docs
 server.use("/api-docs", SwaggerUI.serve, SwaggerUI.setup(swaggerDocument));
-
-
-
-
-
 
 //Logging Middleware
 server.use(morgan("dev"));
